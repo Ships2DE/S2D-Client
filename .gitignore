@@ -1,0 +1,4 @@
+# Godot 3.X specific ignores
+.godot/
+.idea/
+.mono/
