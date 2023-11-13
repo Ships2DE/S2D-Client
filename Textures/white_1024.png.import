@@ -2,25 +2,27 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/white_1024.png-70139718c3dfff9af6978364b1642151.stex"
+path.s3tc="res://.import/white_1024.png-70139718c3dfff9af6978364b1642151.s3tc.stex"
+path.etc2="res://.import/white_1024.png-70139718c3dfff9af6978364b1642151.etc2.stex"
 metadata={
-"vram_texture": false
+"imported_formats": [ "s3tc", "etc2" ],
+"vram_texture": true
 }
 
 [deps]
 
 source_file="res://Textures/white_1024.png"
-dest_files=[ "res://.import/white_1024.png-70139718c3dfff9af6978364b1642151.stex" ]
+dest_files=[ "res://.import/white_1024.png-70139718c3dfff9af6978364b1642151.s3tc.stex", "res://.import/white_1024.png-70139718c3dfff9af6978364b1642151.etc2.stex" ]
 
 [params]
 
-compress/mode=0
-compress/lossy_quality=0.7
+compress/mode=2
+compress/lossy_quality=0.1
 compress/hdr_mode=0
 compress/bptc_ldr=0
 compress/normal_map=0
-flags/repeat=0
-flags/filter=true
+flags/repeat=1
+flags/filter=false
 flags/mipmaps=false
 flags/anisotropic=false
 flags/srgb=2

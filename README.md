@@ -24,7 +24,7 @@ Credits to:
   
 ## License
 
-Copyright 2023 © Hannes Trebbin / the Ships2.DE Project
+Copyright © 2023  Hannes Trebbin / Ships2.DE
 
 All rights reserved. 
 

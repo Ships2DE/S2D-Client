@@ -2,8 +2,8 @@
 
 importer="texture"
 type="StreamTexture"
-path.s3tc="res://.import/ship_yamato_hull.png-be29f74bd09cf705a6a1da30f4350257.s3tc.stex"
-path.etc2="res://.import/ship_yamato_hull.png-be29f74bd09cf705a6a1da30f4350257.etc2.stex"
+path.s3tc="res://.import/s2d_icon_512.png-f3d5ade075c7e9a38adbfe2f1b7496c2.s3tc.stex"
+path.etc2="res://.import/s2d_icon_512.png-f3d5ade075c7e9a38adbfe2f1b7496c2.etc2.stex"
 metadata={
 "imported_formats": [ "s3tc", "etc2" ],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Textures/Ships/Yamato/ship_yamato_hull.png"
-dest_files=[ "res://.import/ship_yamato_hull.png-be29f74bd09cf705a6a1da30f4350257.s3tc.stex", "res://.import/ship_yamato_hull.png-be29f74bd09cf705a6a1da30f4350257.etc2.stex" ]
+source_file="res://UI/Textures/Logo/s2d_icon_512.png"
+dest_files=[ "res://.import/s2d_icon_512.png-f3d5ade075c7e9a38adbfe2f1b7496c2.s3tc.stex", "res://.import/s2d_icon_512.png-f3d5ade075c7e9a38adbfe2f1b7496c2.etc2.stex" ]
 
 [params]
 
