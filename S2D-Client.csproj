@@ -3,4 +3,9 @@
     <TargetFramework>net472</TargetFramework>
     <RootNamespace>S2DClient</RootNamespace>
   </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="S2D.Shared">
+      <HintPath>CS\Plugins\S2D.Shared.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

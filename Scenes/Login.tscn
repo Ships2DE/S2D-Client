@@ -1,25 +1,10 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://Textures/white_1024.png" type="Texture" id=1]
-[ext_resource path="res://Ships/Yamato/ship_yamato_hull.png" type="Texture" id=2]
-[ext_resource path="res://Ships/Yamato/ship_yamato_turret.png" type="Texture" id=3]
 [ext_resource path="res://Shader/WaterShader.tres" type="Shader" id=4]
 [ext_resource path="res://Shader/UIBlurShader.tres" type="Shader" id=5]
 [ext_resource path="res://CS/S2D.Client/UI/UI_Login.cs" type="Script" id=6]
-[ext_resource path="res://Ships/Yamato/ship_yamato_deco_1.png" type="Texture" id=7]
 [ext_resource path="res://UI/Textures/Logo/s2d_logo_trimmed.png" type="Texture" id=8]
-[ext_resource path="res://Ships/PT109/PT109.tscn" type="PackedScene" id=9]
-[ext_resource path="res://Shader/SkinnedShipShader.tres" type="Shader" id=10]
-[ext_resource path="res://Ships/PT109/pt109_mg1_overlay.png" type="Texture" id=11]
-[ext_resource path="res://Ships/PT109/pt109_mg1_underlay.png" type="Texture" id=12]
-[ext_resource path="res://Ships/PT109/pt109_hull_shadow.png" type="Texture" id=13]
-[ext_resource path="res://Ships/PT109/pt109_hull_overlay.png" type="Texture" id=14]
-[ext_resource path="res://Ships/PT109/pt109_hull.png" type="Texture" id=15]
-[ext_resource path="res://Textures/Skins/skin_default_metal.png" type="Texture" id=16]
-[ext_resource path="res://Ships/PT109/pt109_mg1.png" type="Texture" id=17]
-[ext_resource path="res://Ships/PT109/pt109_mg2_underlay.png" type="Texture" id=18]
-[ext_resource path="res://Ships/PT109/pt109_mg2_overlay.png" type="Texture" id=19]
-[ext_resource path="res://Ships/PT109/pt109_mg2.png" type="Texture" id=20]
 
 [sub_resource type="ShaderMaterial" id=6]
 shader = ExtResource( 5 )
@@ -45,16 +30,14 @@ shader_param/distortion_speed = 5.0
 shader_param/tile = Vector2( 8192, 8192 )
 shader_param/wave_speed = 1.0
 
-[sub_resource type="ShaderMaterial" id=8]
-shader = ExtResource( 10 )
-shader_param/SkinScale = Vector3( 3, 5, 1 )
-shader_param/SkinOffset = Vector3( 0, 0, 0 )
-shader_param/SkinTexture = ExtResource( 16 )
-
 [node name="Login" type="Node2D"]
 
 [node name="UI_Login" type="CanvasLayer" parent="."]
 script = ExtResource( 6 )
+panelLoginPath = NodePath("Control/PanelContainer/MarginContainer/VBoxContainer_Login")
+panelStatusPath = NodePath("Control/PanelContainer/MarginContainer/VBoxContainer_Connecting")
+labelStatusPath = NodePath("Control/PanelContainer/MarginContainer/VBoxContainer_Connecting/Label_ConnectionStatus")
+lineEditUsername = NodePath("Control/PanelContainer/MarginContainer/VBoxContainer_Login/LineEdit")
 
 [node name="Control" type="Control" parent="UI_Login"]
 anchor_right = 1.0
@@ -209,13 +192,13 @@ custom_constants/margin_top = 10
 custom_constants/margin_left = 10
 custom_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="UI_Login/Control/PanelContainer/MarginContainer"]
+[node name="VBoxContainer_Login" type="VBoxContainer" parent="UI_Login/Control/PanelContainer/MarginContainer"]
 margin_left = 10.0
 margin_top = 10.0
 margin_right = 190.0
 margin_bottom = 82.0
 
-[node name="LineEdit" type="LineEdit" parent="UI_Login/Control/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="LineEdit" type="LineEdit" parent="UI_Login/Control/PanelContainer/MarginContainer/VBoxContainer_Login"]
 margin_right = 180.0
 margin_bottom = 34.0
 align = 1
@@ -223,11 +206,33 @@ placeholder_text = "Username"
 placeholder_alpha = 0.5
 caret_blink = true
 
-[node name="Button" type="Button" parent="UI_Login/Control/PanelContainer/MarginContainer/VBoxContainer"]
+[node name="Button" type="Button" parent="UI_Login/Control/PanelContainer/MarginContainer/VBoxContainer_Login"]
 margin_top = 38.0
 margin_right = 180.0
 margin_bottom = 72.0
 text = "PLAY!"
+
+[node name="VBoxContainer_Connecting" type="VBoxContainer" parent="UI_Login/Control/PanelContainer/MarginContainer"]
+visible = false
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 190.0
+margin_bottom = 82.0
+
+[node name="Label_ConnectionStatus" type="Label" parent="UI_Login/Control/PanelContainer/MarginContainer/VBoxContainer_Connecting"]
+margin_top = 10.0
+margin_right = 180.0
+margin_bottom = 24.0
+size_flags_vertical = 6
+text = "Connecting to server..."
+align = 1
+valign = 1
+
+[node name="Button_Reconnect" type="Button" parent="UI_Login/Control/PanelContainer/MarginContainer/VBoxContainer_Connecting"]
+margin_top = 38.0
+margin_right = 180.0
+margin_bottom = 72.0
+text = "RECONNECT"
 
 [node name="BotBar" type="MarginContainer" parent="UI_Login/Control"]
 anchor_top = 0.934
@@ -248,15 +253,15 @@ margin_bottom = 61.0
 
 [node name="Label" type="Label" parent="UI_Login/Control/BotBar/HBoxContainer"]
 margin_top = 5.0
-margin_right = 372.0
+margin_right = 310.0
 margin_bottom = 36.0
 size_flags_horizontal = 3
 text = "Copyright (c) 2023 - www.Ships2.de
 All rights reserved"
 
 [node name="Button_Legal" type="Button" parent="UI_Login/Control/BotBar/HBoxContainer"]
-margin_left = 376.0
-margin_right = 749.0
+margin_left = 314.0
+margin_right = 624.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -267,8 +272,8 @@ custom_styles/normal = SubResource( 4 )
 text = "Legal Notice"
 
 [node name="Button_Privacy" type="Button" parent="UI_Login/Control/BotBar/HBoxContainer"]
-margin_left = 753.0
-margin_right = 1126.0
+margin_left = 628.0
+margin_right = 938.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -278,9 +283,21 @@ custom_styles/disabled = SubResource( 3 )
 custom_styles/normal = SubResource( 4 )
 text = "Privacy Policy"
 
+[node name="Button_Discord" type="Button" parent="UI_Login/Control/BotBar/HBoxContainer"]
+margin_left = 942.0
+margin_right = 1252.0
+margin_bottom = 41.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+custom_styles/pressed = SubResource( 1 )
+custom_styles/focus = SubResource( 2 )
+custom_styles/disabled = SubResource( 3 )
+custom_styles/normal = SubResource( 4 )
+text = "Discord"
+
 [node name="Button_Rules" type="Button" parent="UI_Login/Control/BotBar/HBoxContainer"]
-margin_left = 1130.0
-margin_right = 1503.0
+margin_left = 1256.0
+margin_right = 1566.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -291,7 +308,7 @@ custom_styles/normal = SubResource( 4 )
 text = "Rules"
 
 [node name="Button_Github" type="Button" parent="UI_Login/Control/BotBar/HBoxContainer"]
-margin_left = 1507.0
+margin_left = 1570.0
 margin_right = 1880.0
 margin_bottom = 41.0
 size_flags_horizontal = 3
@@ -303,7 +320,7 @@ custom_styles/normal = SubResource( 4 )
 text = "Github"
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2( 6728, 3830 )
+position = Vector2( 66190, 64828 )
 current = true
 zoom = Vector2( 3, 3 )
 
@@ -315,113 +332,10 @@ scale = Vector2( 128, 128 )
 texture = ExtResource( 1 )
 centered = false
 
-[node name="Hull" type="Sprite" parent="Game"]
-position = Vector2( 5680, 4260 )
-rotation = -0.367198
-scale = Vector2( 5, 5 )
-z_index = 10
-texture = ExtResource( 2 )
-
-[node name="TurretMain" type="Sprite" parent="Game/Hull"]
-position = Vector2( 74, 0 )
-z_index = 12
-texture = ExtResource( 3 )
-
-[node name="TurretMain2" type="Sprite" parent="Game/Hull"]
-position = Vector2( 129, 1 )
-z_index = 11
-texture = ExtResource( 3 )
-
-[node name="TurretMain3" type="Sprite" parent="Game/Hull"]
-position = Vector2( -675, 1009.09 )
-rotation = 3.14159
-z_index = 11
-texture = ExtResource( 3 )
-offset = Vector2( -512.516, 1008.09 )
-
-[node name="Overlay" type="Sprite" parent="Game/Hull"]
-z_index = 11
-z_as_relative = false
-texture = ExtResource( 7 )
-
-[node name="Shadow" type="Sprite" parent="Game/Hull"]
-modulate = Color( 0, 0, 0, 0.156863 )
-position = Vector2( 10, 10 )
-z_index = 9
-z_as_relative = false
-texture = ExtResource( 2 )
-
-[node name="PT109" parent="." instance=ExtResource( 9 )]
-position = Vector2( 7403, 4301 )
-
-[node name="PT110" type="Node2D" parent="."]
-position = Vector2( 7403, 4475 )
-
-[node name="Render" type="Node2D" parent="PT110"]
-rotation = 1.5708
-
-[node name="Pt109HullShadow" type="Sprite" parent="PT110/Render"]
-self_modulate = Color( 1, 1, 1, 0.686275 )
-texture = ExtResource( 13 )
-
-[node name="Pt109Hull" type="Sprite" parent="PT110/Render"]
-material = SubResource( 8 )
-texture = ExtResource( 15 )
-
-[node name="Pt109HullOverlay" type="Sprite" parent="PT110/Render"]
-texture = ExtResource( 14 )
-
-[node name="MG_1" type="Node2D" parent="PT110/Render"]
-visible = false
-position = Vector2( 20, -14 )
-
-[node name="Pt109Mg1Underlay" type="Sprite" parent="PT110/Render/MG_1"]
-position = Vector2( 0, 1 )
-texture = ExtResource( 12 )
-
-[node name="Pt109Mg1" type="Sprite" parent="PT110/Render/MG_1"]
-position = Vector2( 0, 1 )
-texture = ExtResource( 17 )
-
-[node name="Pt109Mg1Overlay" type="Sprite" parent="PT110/Render/MG_1"]
-position = Vector2( 0, 1 )
-texture = ExtResource( 11 )
-
-[node name="MG_2" type="Node2D" parent="PT110/Render"]
-visible = false
-position = Vector2( -13, 73 )
-rotation = -1.57079
-
-[node name="Pt109Mg1Underlay" type="Sprite" parent="PT110/Render/MG_2"]
-position = Vector2( 0, 1 )
-texture = ExtResource( 12 )
-
-[node name="Pt109Mg1" type="Sprite" parent="PT110/Render/MG_2"]
-position = Vector2( 0, 1 )
-texture = ExtResource( 17 )
-
-[node name="Pt109Mg1Overlay" type="Sprite" parent="PT110/Render/MG_2"]
-position = Vector2( 0, 1 )
-texture = ExtResource( 11 )
-
-[node name="MG_3" type="Node2D" parent="PT110/Render"]
-visible = false
-position = Vector2( -0.5, 141.5 )
-rotation = 3.14159
-
-[node name="Pt109Mg2Underlay" type="Sprite" parent="PT110/Render/MG_3"]
-position = Vector2( -0.5, -3.5 )
-texture = ExtResource( 18 )
-
-[node name="Pt109Mg2" type="Sprite" parent="PT110/Render/MG_3"]
-position = Vector2( -0.5, -3.5 )
-texture = ExtResource( 20 )
-
-[node name="Pt109Mg2Overlay" type="Sprite" parent="PT110/Render/MG_3"]
-position = Vector2( -0.5, -3.5 )
-texture = ExtResource( 19 )
-
+[connection signal="pressed" from="UI_Login/Control/PanelContainer/MarginContainer/VBoxContainer_Login/Button" to="UI_Login" method="Button_Login"]
+[connection signal="pressed" from="UI_Login/Control/PanelContainer/MarginContainer/VBoxContainer_Connecting/Button_Reconnect" to="UI_Login" method="Button_Reconnect"]
 [connection signal="pressed" from="UI_Login/Control/BotBar/HBoxContainer/Button_Legal" to="UI_Login" method="OpenLink" binds= [ "https://tanks2.de/index.php?legal-notice/" ]]
 [connection signal="pressed" from="UI_Login/Control/BotBar/HBoxContainer/Button_Privacy" to="UI_Login" method="OpenLink" binds= [ "https://tanks2.de/index.php?privacy-policy/" ]]
+[connection signal="pressed" from="UI_Login/Control/BotBar/HBoxContainer/Button_Discord" to="UI_Login" method="OpenLink" binds= [ "https://discord.gg/zrMxRCxMdC" ]]
 [connection signal="pressed" from="UI_Login/Control/BotBar/HBoxContainer/Button_Rules" to="UI_Login" method="OpenLink" binds= [ "https://tanks2.de/index.php?project-rules-en/" ]]
 [connection signal="pressed" from="UI_Login/Control/BotBar/HBoxContainer/Button_Github" to="UI_Login" method="OpenLink" binds= [ "https://github.com/Ships2DE" ]]
