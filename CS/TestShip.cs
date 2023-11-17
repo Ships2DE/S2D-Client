@@ -5,6 +5,7 @@ using S2D.Shared.Constants;
 public class TestShip : RigidBody2D {
 
 	public ShipDataShared Data;
+	private float maxspeed = 1;
 	
 	private bool[] wasd = new bool[4];
 
@@ -19,20 +20,26 @@ public class TestShip : RigidBody2D {
 		wasd[3] = Input.IsKeyPressed((int)KeyList.D);
 	}
 
-	public override void _PhysicsProcess(float delta) {
-
+	public override void _PhysicsProcess(float delta)
+	{
+		
 		Vector2 spd = Vector2.Zero;
 		if (wasd[0]) {
-			spd.x += 1.0f;
+			spd.x = Mathf.Min(this.LinearVelocity.x + 0.1f, maxspeed);
 		}
-		if (wasd[1]) {
-			spd.y -= 1.0f;
+		if (wasd[1])
+		{
+			spd.y = -maxspeed;
+
 		}
 		if (wasd[2]) {
-			spd.x -= 1.0f;
+			spd.x = Mathf.Max(LinearVelocity.x - 0.1f, -maxspeed);
+			
 		}
-		if (wasd[3]) {
-			spd.y += 1.0f;
+		if (wasd[3])
+		{
+			spd.y = maxspeed;
+
 		}
 
 		Vector2 speed = (Transform.x).Normalized() * (spd.x * delta * Data.Speed * (float)GameConstants.PIXELS_PER_METER);
