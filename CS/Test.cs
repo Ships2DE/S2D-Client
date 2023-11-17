@@ -1,21 +1,17 @@
 using Godot;
 using System;
 
-public class Test : Node
-{
-    // Declare member variables here. Examples:
-    // private int a = 2;
-    // private string b = "text";
+public class Test : Node {
 
-    // Called when the node enters the scene tree for the first time.
-    public override void _Ready()
-    {
-        
-    }
+	[Export]
+	public PackedScene TestShip;
 
-//  // Called every frame. 'delta' is the elapsed time since the previous frame.
-//  public override void _Process(float delta)
-//  {
-//      
-//  }
+	public override void _Ready() {
+		
+		Node ship = TestShip.Instance();
+		RigidBody2D rigidBody2D = ship.GetNode("RigidBody2D") as RigidBody2D;
+		rigidBody2D.SetScript(GD.Load("res://CS/TestShip.cs"));
+		this.AddChild(ship);
+	}
 }
+

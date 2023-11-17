@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://CS/Test.cs" type="Script" id=1]
+[ext_resource path="res://Shader/WaterShader.tres" type="Shader" id=2]
+[ext_resource path="res://Textures/white_1024.png" type="Texture" id=3]
+[ext_resource path="res://SharedAssets/Ships/PT109/PT109.tscn" type="PackedScene" id=4]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/WATER_COL = Color( 0.207843, 0.337255, 0.533333, 1 )
+shader_param/WATER2_COL = Color( 0.192157, 0.298039, 0.447059, 1 )
+shader_param/FOAM_COL = Color( 0.262745, 0.372549, 0.572549, 1 )
+shader_param/distortion_speed = 5.0
+shader_param/tile = Vector2( 8192, 8192 )
+shader_param/wave_speed = 1.0
+
+[node name="TestScene" type="Node2D"]
+script = ExtResource( 1 )
+TestShip = ExtResource( 4 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 588, 274 )
+current = true
+zoom = Vector2( 2, 2 )
+smoothing_enabled = true
+
+[node name="WaterLayer" type="Sprite" parent="."]
+material = SubResource( 1 )
+scale = Vector2( 128, 128 )
+texture = ExtResource( 3 )
+centered = false
