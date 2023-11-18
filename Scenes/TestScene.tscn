@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://CS/Test.cs" type="Script" id=1]
 [ext_resource path="res://Shader/WaterShader.tres" type="Shader" id=2]
 [ext_resource path="res://Textures/white_1024.png" type="Texture" id=3]
 [ext_resource path="res://SharedAssets/Ships/PT109/PT109.tscn" type="PackedScene" id=4]
 [ext_resource path="res://CS/S2D.Client/GameCamera.cs" type="Script" id=5]
+[ext_resource path="res://CS/S2D.Client/UI/UI_FPSCounter.cs" type="Script" id=6]
+[ext_resource path="res://UI/Fonts/FD-Play-Bold.tres" type="DynamicFontData" id=7]
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 2 )
@@ -15,10 +17,15 @@ shader_param/distortion_speed = 5.0
 shader_param/tile = Vector2( 8192, 8192 )
 shader_param/wave_speed = 1.0
 
+[sub_resource type="DynamicFont" id=3]
+size = 32
+font_data = ExtResource( 7 )
+
 [node name="TestScene" type="Node2D"]
 script = ExtResource( 1 )
 TestShip = ExtResource( 4 )
 camPath = NodePath("Camera2D")
+speedPath = NodePath("CanvasLayer/Control/Label2")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2( 588, 274 )
@@ -36,3 +43,42 @@ centered = false
 [node name="PT109" parent="." instance=ExtResource( 4 )]
 position = Vector2( 944, 63 )
 rotation = -1.57542
+
+[node name="PT110" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1049, 498 )
+rotation = -1.57542
+
+[node name="PT111" parent="." instance=ExtResource( 4 )]
+position = Vector2( 819, 891 )
+rotation = -1.57542
+
+[node name="PT112" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1212, 235 )
+rotation = -1.57542
+
+[node name="PT113" parent="." instance=ExtResource( 4 )]
+position = Vector2( 1183, 665 )
+rotation = -1.57542
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="Label" type="Label" parent="CanvasLayer/Control"]
+margin_left = 10.0
+margin_top = 10.0
+margin_right = 50.0
+margin_bottom = 48.0
+custom_fonts/font = SubResource( 3 )
+script = ExtResource( 6 )
+
+[node name="Label2" type="Label" parent="CanvasLayer/Control"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 10.0
+margin_top = -48.0
+margin_right = 50.0
+margin_bottom = -10.0
+custom_fonts/font = SubResource( 3 )
